@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/bg_gradient"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <!-- TOP BAR -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- Nút Back hiện đại -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnBack"
+            android:src="@drawable/ic_arrow_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            app:tint="#FFFFFF"
+            android:scaleType="centerInside"/>
+
+        <!-- Tiêu đề màn hình -->
+        <TextView
+            android:text="Điều khiển âm lượng"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!-- MAIN CONTENT CARD -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:padding="32dp"
+        android:background="@drawable/bg_card"
+        android:elevation="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Status -->
+        <TextView
+            android:id="@+id/txtStatus"
+            android:text="Đang chờ..."
+            android:textColor="#333333"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="28dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Hướng dẫn -->
+        <TextView
+            android:text="Nghiêng trái ➜ Tăng âm lượng\nNghiêng phải ➜ Giảm âm lượng"
+            android:textColor="#555555"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:lineSpacingExtra="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Icon minh họa to & đẹp -->
+        <TextView
+            android:text="🎧"
+            android:textSize="90sp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <!-- Spacer đẩy card lên giữa màn hình -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>
