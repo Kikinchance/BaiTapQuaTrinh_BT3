@@ -7,6 +7,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,12 +16,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MusicControlActivity extends AppCompatActivity {
 
-    SensorManager sensorManager;
-    Sensor accelerometer;
+    private SensorManager sensorManager;
+    private Sensor gyroSensor;
 
-    TextView txtStatus;
+    private TextView txtStatus;
 
-    long lastTime = 0;
+    // ===== CONFIG =====
+    private static final float THRESHOLD = 1.5f;     // rad/s (do nhay)
+    private static final long COOLDOWN_MS = 800;     // chong spam
+    private static final float FILTER_ALPHA = 0.8f;  // loc nhieu
+
+    // ===== STATE =====
+    private float filteredX = 0f;
+    private long lastTriggerTime = 0;
+
+    private enum State {
+        IDLE,
+        LOCKED
+    }
+
+    private State state = State.IDLE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,36 +44,56 @@ public class MusicControlActivity extends AppCompatActivity {
 
         txtStatus = findViewById(R.id.txtStatus);
 
-        // nút back
         ImageView btnBack = findViewById(R.id.btnBack);
-        if (btnBack != null) {
-            btnBack.setOnClickListener(v -> finish());
-        }
+        if (btnBack != null) btnBack.setOnClickListener(v -> finish());
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        gyroSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+
+        if (gyroSensor == null) {
+            txtStatus.setText("Thiết bị không hỗ trợ Gyroscope!");
+        }
     }
 
-    SensorEventListener listener = new SensorEventListener() {
+    private final SensorEventListener listener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
 
-            float x = event.values[0];
+            float rawZ = event.values[2]; // truc X
 
-            long now = System.currentTimeMillis();
+            // ===== LOW PASS FILTER =====
+            filteredX = FILTER_ALPHA * filteredX + (1 - FILTER_ALPHA) * rawZ;
 
-            // chống spam
-            if (now - lastTime < 1000) return;
+            long now = SystemClock.elapsedRealtime();
 
-            if (x > 6) {
-                txtStatus.setText("⏭️ NEXT (Spotify)");
-                nextTrack();
-                lastTime = now;
+            // ===== COOLDOWN =====
+            if (now - lastTriggerTime < COOLDOWN_MS) return;
 
-            } else if (x < -6) {
-                txtStatus.setText("⏮️ PREVIOUS (Spotify)");
-                prevTrack();
-                lastTime = now;
+            switch (state) {
+
+                case IDLE:
+
+                    if (filteredX > THRESHOLD) {
+                        onPrevious();
+                        state = State.LOCKED;
+                        lastTriggerTime = now;
+
+                    } else if (filteredX < -THRESHOLD) {
+                        onNext();
+                        state = State.LOCKED;
+                        lastTriggerTime = now;
+                    }
+
+                    break;
+
+                case LOCKED:
+
+                    // reset khi toc do quay gan 0
+                    if (Math.abs(filteredX) < 0.2f) {
+                        state = State.IDLE;
+                    }
+
+                    break;
             }
         }
 
@@ -66,34 +101,48 @@ public class MusicControlActivity extends AppCompatActivity {
         public void onAccuracyChanged(Sensor sensor, int accuracy) {}
     };
 
-    // 👉 Spotify nhận media key
-    void nextTrack() {
-        AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+    // ===== ACTION =====
 
-        audioManager.dispatchMediaKeyEvent(
-                new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT));
-        audioManager.dispatchMediaKeyEvent(
-                new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_NEXT));
+    private void onNext() {
+        txtStatus.setText("⏭️ NEXT SONG");
+        sendMediaKey(KeyEvent.KEYCODE_MEDIA_NEXT);
+        WifiClient.sendCommand("NEXT");
     }
 
-    void prevTrack() {
-        AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
-
-        audioManager.dispatchMediaKeyEvent(
-                new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS));
-        audioManager.dispatchMediaKeyEvent(
-                new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_PREVIOUS));
+    private void onPrevious() {
+        txtStatus.setText("⏮️ PREVIOUS SONG");
+        sendMediaKey(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
+        WifiClient.sendCommand("PREVIOUS");
     }
+
+    private void sendMediaKey(int keyCode) {
+        AudioManager am = (AudioManager) getSystemService(AUDIO_SERVICE);
+        if (am == null) return;
+
+        am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, keyCode));
+        am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, keyCode));
+    }
+
+    // ===== LIFECYCLE =====
 
     @Override
     protected void onResume() {
         super.onResume();
-        sensorManager.registerListener(listener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        if (gyroSensor != null) {
+            sensorManager.registerListener(
+                    listener,
+                    gyroSensor,
+                    SensorManager.SENSOR_DELAY_GAME
+            );
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         sensorManager.unregisterListener(listener);
+
+        filteredX = 0f;
+        state = State.IDLE;
     }
 }

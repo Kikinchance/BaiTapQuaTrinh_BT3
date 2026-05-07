@@ -145,6 +145,7 @@ public class FlashControlActivity extends AppCompatActivity {
         try {
             cameraManager.setTorchMode(cameraId, true);
             txtStatus.setText("🔆 BẬT FLASH");
+            WifiClient.sendCommand("LIGHT_ON");
         } catch (Exception e) {}
     }
 
@@ -152,6 +153,7 @@ public class FlashControlActivity extends AppCompatActivity {
         try {
             cameraManager.setTorchMode(cameraId, false);
             txtStatus.setText("🌙 TẮT FLASH");
+            WifiClient.sendCommand("LIGHT_OFF");
         } catch (Exception e) {}
     }
 

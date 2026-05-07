@@ -214,5 +214,15 @@
         </androidx.cardview.widget.CardView>
 
     </GridLayout>
+    <TextView
+        android:id="@+id/txtStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chưa kết nối"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
 
 </LinearLayout>

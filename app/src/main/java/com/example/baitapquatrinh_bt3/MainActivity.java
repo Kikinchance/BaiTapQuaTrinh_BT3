@@ -1,5 +1,7 @@
 package com.example.baitapquatrinh_bt3;
 
+
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -13,7 +15,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 public class MainActivity extends AppCompatActivity {
 
     LinearLayout btnA, btnB, btnC, btnD, btnDarkMode;
-    TextView txtMode, txtTitle;
+    TextView txtMode,txtStatus ,txtTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         btnB = findViewById(R.id.btnB);
         btnC = findViewById(R.id.btnC);
 
+        btnD = findViewById(R.id.btnD);
+        txtStatus = findViewById(R.id.txtStatus);
         // 🔥 ánh xạ dark mode
         btnDarkMode = findViewById(R.id.btnDarkMode);
         txtMode = findViewById(R.id.txtMode);
@@ -74,11 +78,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnB.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, VolumeControlctivity.class));
+            startActivity(new Intent(MainActivity.this, VolumeControlActivity.class));
         });
 
         btnC.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, MusicControlActivity.class));
         });
+        btnD.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, IoTControlActivity.class));
+        });
+
     }
 }

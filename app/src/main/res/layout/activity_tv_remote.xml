@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@drawable/bg_gradient">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Top bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btnBack"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:padding="10dp"
+                android:src="@drawable/ic_arrow_back"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                app:tint="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Remote TV Samsung"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtRemoteStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center"
+            android:text="Sẵn sàng điều khiển"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <!-- POWER + QUICK -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_remote_panel"
+            android:padding="12dp"
+            android:layout_marginBottom="10dp">
+
+            <Button
+                android:id="@+id/btnPower"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_remote_btn_power"
+                android:text="POWER"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+            <Space android:layout_width="8dp" android:layout_height="1dp" />
+
+            <Button
+                android:id="@+id/btnSource"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_remote_btn"
+                android:text="SOURCE"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF" />
+
+            <Space android:layout_width="8dp" android:layout_height="1dp" />
+
+            <Button
+                android:id="@+id/btnMute"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_remote_btn"
+                android:text="MUTE"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <!-- D-PAD -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/bg_remote_panel"
+            android:padding="14dp"
+            android:layout_marginBottom="10dp">
+
+            <Button
+                android:id="@+id/btnUp"
+                android:layout_width="100dp"
+                android:layout_height="46dp"
+                android:background="@drawable/bg_remote_btn"
+                android:text="UP"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp">
+
+                <Button
+                    android:id="@+id/btnLeft"
+                    android:layout_width="100dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/bg_remote_btn"
+                    android:text="LEFT"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF" />
+
+                <Space android:layout_width="8dp" android:layout_height="1dp" />
+
+                <Button
+                    android:id="@+id/btnOk"
+                    android:layout_width="100dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/bg_remote_btn_power"
+                    android:text="OK"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold" />
+
+                <Space android:layout_width="8dp" android:layout_height="1dp" />
+
+                <Button
+                    android:id="@+id/btnRight"
+                    android:layout_width="100dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/bg_remote_btn"
+                    android:text="RIGHT"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnDown"
+                android:layout_width="100dp"
+                android:layout_height="46dp"
+                android:background="@drawable/bg_remote_btn"
+                android:text="DOWN"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</ScrollView>
