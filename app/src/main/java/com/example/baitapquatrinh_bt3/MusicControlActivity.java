@@ -59,7 +59,7 @@ public class MusicControlActivity extends AppCompatActivity {
         @Override
         public void onSensorChanged(SensorEvent event) {
 
-            float rawZ = event.values[2]; // truc X
+            float rawZ = event.values[2]; // truc Z
 
             // ===== LOW PASS FILTER =====
             filteredX = FILTER_ALPHA * filteredX + (1 - FILTER_ALPHA) * rawZ;

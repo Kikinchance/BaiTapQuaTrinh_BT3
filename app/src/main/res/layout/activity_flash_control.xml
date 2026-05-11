@@ -83,9 +83,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-</LinearLayout>
 
-    <!-- Spacer để đẩy nội dung lên giữa màn hình một chút -->
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:padding="32dp"
+        android:background="@drawable/bg_card"
+        android:elevation="12dp"
+        app:cardCornerRadius="28dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp"
+            android:text="Nói bật/tắt để điều khiển "
+            android:textColor="#555555"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/btnMicrophone"
+            android:layout_width="100dp"
+            android:layout_height="88dp"
+            android:contentDescription="Voice Control"
+            android:padding="15dp"
+            android:scaleType="centerInside"
+            android:src="@android:drawable/ic_btn_speak_now" />
+    </LinearLayout>
+       <!-- Spacer để đẩy nội dung lên giữa màn hình một chút -->
 <View
 android:layout_width="match_parent"
 android:layout_height="0dp"

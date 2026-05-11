@@ -2,11 +2,12 @@ package com.example.baitapquatrinh_bt3;
 
 import java.io.OutputStream;
 import java.net.Socket;
+import android.util.Log;
 
 public class WifiClient {
 
     // ===== CẤU HÌNH =====
-    private static final String SERVER_IP = "192.168.100.237"; //  IP laptop
+    private static final String SERVER_IP = "192.168.28.92"; //  IP laptop
     private static final int SERVER_PORT = 6000; //  port
 
     // ===== TRẠNG THÁI =====
@@ -38,13 +39,19 @@ public class WifiClient {
     public static void sendCommand(String command) {
         new Thread(() -> {
             try {
-                if (!isConnected || socket == null) return;
+                Log.d("WifiClient", "sendCommand: " + command + " connected=" + isConnected);
+                if (!isConnected || socket == null) {
+                    Log.w("WifiClient", "Not connected, cannot send: " + command);
+                    return;
+                }
 
                 OutputStream os = socket.getOutputStream();
                 os.write((command + "\n").getBytes("UTF-8"));
                 os.flush();
+                Log.d("WifiClient", "Command sent: " + command);
 
             } catch (Exception e) {
+                Log.e("WifiClient", "sendCommand error", e);
                 isConnected = false;
             }
         }).start();

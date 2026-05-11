@@ -60,7 +60,7 @@ public class VolumeControlActivity extends AppCompatActivity {
             // orientation[2] = roll (rad) ~ xoay quanh trục Y thiết bị
             float rollDeg = (float) Math.toDegrees(orientation[2]);
 
-            if (rollDeg < -ROLL_THRESHOLD_DEG) {
+            if (rollDeg > -ROLL_THRESHOLD_DEG) {
                 audioManager.adjustStreamVolume(
                         AudioManager.STREAM_MUSIC,
                         AudioManager.ADJUST_RAISE,
@@ -70,7 +70,7 @@ public class VolumeControlActivity extends AppCompatActivity {
                 WifiClient.sendCommand("VOLUME_UP");
                 lastTime = now;
 
-            } else if (rollDeg > ROLL_THRESHOLD_DEG) {
+            } else if (rollDeg < ROLL_THRESHOLD_DEG) {
                 audioManager.adjustStreamVolume(
                         AudioManager.STREAM_MUSIC,
                         AudioManager.ADJUST_LOWER,
