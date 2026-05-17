@@ -2,6 +2,7 @@ package com.example.baitapquatrinh_bt3;
 
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -14,9 +15,10 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 public class MainActivity extends AppCompatActivity {
 
-    LinearLayout btnA, btnB, btnC, btnD, btnDarkMode;
+    LinearLayout btnA, btnB, btnC, btnD, btnDarkMode, btnE;
     TextView txtMode,txtStatus ,txtTitle;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
         btnD = findViewById(R.id.btnD);
         txtStatus = findViewById(R.id.txtStatus);
+
+        btnE = findViewById(R.id.btnE);
         // 🔥 ánh xạ dark mode
         btnDarkMode = findViewById(R.id.btnDarkMode);
         txtMode = findViewById(R.id.txtMode);
@@ -86,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
         });
         btnD.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, IoTControlActivity.class));
+        });
+        btnE.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, AirGestureActivity.class));
         });
 
     }

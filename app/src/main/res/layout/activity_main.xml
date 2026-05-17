@@ -9,8 +9,8 @@
 
     <!-- TITLE -->
     <TextView
-        android:text="SMART CONTROL APP"
         android:id="@+id/txtTitle"
+        android:text="SMART CONTROL APP"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <!-- Dark mode toggle -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -48,6 +49,7 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
     <!-- GRID 2x2 -->
     <GridLayout
         android:columnCount="2"
@@ -68,6 +70,7 @@
             app:cardBackgroundColor="#6C4AB6">
 
             <LinearLayout
+                android:id="@+id/btnA"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -75,12 +78,11 @@
                 android:padding="12dp"
                 android:foreground="?attr/selectableItemBackground"
                 android:clickable="true"
-                android:focusable="true"
-                android:id="@+id/btnA">
+                android:focusable="true">
 
                 <TextView
                     android:text="💡"
-                    android:textSize="68sp"
+                    android:textSize="48sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"/>
@@ -107,6 +109,7 @@
             app:cardBackgroundColor="#1F7A9A">
 
             <LinearLayout
+                android:id="@+id/btnB"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -114,12 +117,11 @@
                 android:padding="12dp"
                 android:foreground="?attr/selectableItemBackground"
                 android:clickable="true"
-                android:focusable="true"
-                android:id="@+id/btnB">
+                android:focusable="true">
 
                 <TextView
                     android:text="🎧"
-                    android:textSize="68sp"
+                    android:textSize="48sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"/>
@@ -146,6 +148,7 @@
             app:cardBackgroundColor="#F48C06">
 
             <LinearLayout
+                android:id="@+id/btnC"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -153,12 +156,11 @@
                 android:padding="12dp"
                 android:foreground="?attr/selectableItemBackground"
                 android:clickable="true"
-                android:focusable="true"
-                android:id="@+id/btnC">
+                android:focusable="true">
 
                 <TextView
                     android:text="🔄"
-                    android:textSize="68sp"
+                    android:textSize="48sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"/>
@@ -185,6 +187,7 @@
             app:cardBackgroundColor="#2DC653">
 
             <LinearLayout
+                android:id="@+id/btnD"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -192,12 +195,11 @@
                 android:padding="12dp"
                 android:foreground="?attr/selectableItemBackground"
                 android:clickable="true"
-                android:focusable="true"
-                android:id="@+id/btnD">
+                android:focusable="true">
 
                 <TextView
                     android:text="🌐"
-                    android:textSize="68sp"
+                    android:textSize="48sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"/>
@@ -214,6 +216,58 @@
         </androidx.cardview.widget.CardView>
 
     </GridLayout>
+
+    <!-- Ô 5: Air Gesture — full width, riêng biệt bên dưới grid -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="8dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="#8B2FC9">
+
+        <LinearLayout
+            android:id="@+id/btnE"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:text="✋"
+                android:textSize="32sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Air Gesture"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="cử chỉ trong không trung"
+                    android:textSize="12sp"
+                    android:textColor="#DDFFFFFF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
     <TextView
         android:id="@+id/txtStatus"
         android:layout_width="match_parent"
@@ -223,6 +277,6 @@
         android:textStyle="bold"
         android:textColor="#FFFFFF"
         android:gravity="center"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="16dp"/>
 
 </LinearLayout>
